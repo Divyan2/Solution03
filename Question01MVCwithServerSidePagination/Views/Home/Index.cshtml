@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.15/css/dataTables.semanticui.min.css" rel="stylesheet" />
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/dataTables.semanticui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#recordtable").DataTable({
+            "ajax": {
+                "url": "/Home/GetList",
+                "type": "POST",
+                "datatype": "json"
+            },
+            "columns": [
+                { "data": "Name", "name": "Name" },
+                { "data": "Gender", "name": "Gender" },
+                { "data": "DOB", "name": "DOB" },
+                { "data": "CreatedOn", "name": "CreatedOn" },
+                { "data": "UpdatedOn", "name": "UpdatedOn" },
+                { "data": "CreatedBy", "name": "CreatedBy" },
+                { "data": "UpdatedBy", "name": "UpdatedBy" },
+                {
+                    "render": function (data, type, row) {
+                        return '<a class="ui primary button" href="' + editUrl(row.Id) + '">Edit</a>';
+                    }
+                },
+                {
+                    "render": function (data, type, row) {
+                        return '<a class="ui red button" href="' + deleteUrl(row.Id) + '">Delete</a>';
+                    }
+                },
+                {
+                    "render": function (data, type, row) {
+                        return '<a class="ui button" href="' + detailsUrl(row.Id) + '">Details</a>';
+                    }
+                }
+            ],
+
+            "serverSide": true,
+            "order": [0, "asc"],
+            "processing": true,
+            "language": {
+                "processing": "Processing... Please wait."
+            }
+        });
+
+        $('#recordtable_wrapper').prepend('<button onclick="createNewRecord()">Create New Record</button>');
+    });
+
+    function createNewRecord() {
+        window.location.href = '/Home/Create';
+    }
+
+    function editUrl(recordId) {
+        return '@Url.Action("Edit", "Home")' + '/' + recordId;
+    }
+
+    function deleteUrl(recordId) {
+        return '@Url.Action("Delete", "Home")' + '/' + recordId;
+    }
+
+    function detailsUrl(recordId) {
+        return '@Url.Action("Details", "Home")' + '/' + recordId;
+    }
+</script>
+
+
+<h2>Records</h2>
+
+<table id="recordtable" class="ui celled table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>DOB</th>
+            <th>Created_On</th>
+            <th>Updated_On</th>
+            <th>Created_By</th>
+            <th>Updated_By</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+</table>

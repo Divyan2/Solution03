@@ -1,0 +1,120 @@
+﻿@model Stage03Library.Models.Q4models.Individual
+@{
+    ViewBag.Title = "Details";
+    Layout = null;
+}
+
+<style>
+    body {
+        text-align: center;
+        background-color: #f4f4f4;
+    }
+
+    .container {
+        width: 30%;
+        margin: 20px auto;
+        background-color: #fff;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h4 {
+        color: #4CAF50;
+    }
+
+    .dl-horizontal dt {
+        width: 120px;
+    }
+
+    .dl-horizontal dd {
+        margin-left: 130px;
+    }
+
+    .backbutton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #007BFF;
+        width: 20%;
+        color: #fff;
+        border: 1px solid #007BFF;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+        margin-top: 20px;
+    }
+
+        .backbutton:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+    .backbtn {
+        text-decoration: none;
+        color: #fff;
+        left: 20%;
+    }
+</style>
+
+<div class="container">
+    <h4>Individual</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.City.CityName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City.CityName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country.CountryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country.CountryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.State.StateName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.State.StateName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DOB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DOB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+    </dl>
+    <div class="backbutton">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "backbtn" })
+    </div>
+    <div class="backbutton">
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "backbtn" })
+    </div>   
+</div>

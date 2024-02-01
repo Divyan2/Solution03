@@ -1,0 +1,134 @@
+﻿@model List<Stage03Library.Models.Q4models.Individual>
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<style>
+    body {
+        text-align: center;
+    }
+
+    .container {
+        width: 80%;
+        margin: 20px auto;
+        overflow: auto;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        padding: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #f9f9f9;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #4CAF50;
+        color: #fff;
+    }
+
+    td a {
+        display: inline-block;
+        padding: 8px 12px;
+        margin: 5px;
+        text-align: center;
+        text-decoration: none;
+        background-color: #007BFF;
+        color: #fff;
+        border: 1px solid #007BFF;
+        border-radius: 4px;
+    }
+
+    .no-records {
+        margin: 20px;
+        color: #555;
+    }
+
+    .create-button {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 8px 12px;
+        background-color: #007BFF;
+        color: #fff;
+        text-decoration: none;
+        border: 1px solid #007BFF;
+        border-radius: 4px;
+    }
+</style>
+
+
+
+<a href="@Url.Action("Create")" class="create-button">Create New</a>
+
+<div class="container">
+    @if (Model.Any())
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().DOB)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Gender)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Country)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().State)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().City)
+                </th>
+                <th>Action</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DOB)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Gender)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Country.CountryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.State.StateName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City.CityName)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit", new { id = item.ID })">Edit</a>
+                        <a href="@Url.Action("Details", new { id = item.ID })">Details</a>
+                        <a href="@Url.Action("Delete", new { id = item.ID })">Delete</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <div class="no-records">
+            No records found.
+        </div>
+    }
+</div>
